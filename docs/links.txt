@@ -1,0 +1,197 @@
+Links
+-----
+- Angular coding style guide
+  - https://angular.io/guide/styleguide
+  
+- Angular Cheat Sheet
+  - https://angular.io/guide/cheatsheet
+  
+- Glossary
+  - https://angular.io/guide/glossary
+  
+- Introduction to Angular concepts
+  - https://angular.io/guide/architecture
+  
+- Launching your app with a root module (Bootstrapping)
+  - https://angular.io/guide/bootstrapping
+
+- Angular Modules (NgModules)
+  - https://angular.io/guide/architecture-modules
+  
+- Introduction to components and templates
+  - https://angular.io/guide/architecture-components
+  
+- Hooking into the component lifecycle
+  - https://angular.io/guide/lifecycle-hooks
+  
+- Directives
+  - Attribute Directives
+    - https://angular.io/guide/attribute-directives
+  
+  - Structural Directives
+    - https://angular.io/guide/structural-directives
+    
+- Angular Forms
+  - Introduction to forms in Angular
+    - https://angular.io/guide/forms-overview
+    
+  - Validating form input
+    - https://angular.io/guide/form-validation
+
+- Component Interaction
+  - https://angular.io/guide/component-interaction
+  
+- Routing & Navigation
+  - https://angular.io/guide/router
+
+- Introduction to services and dependency injection
+  - https://angular.io/guide/architecture-services
+  
+- Promises
+  - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+  
+- Observables
+  - Introduction
+    - http://reactivex.io/intro.html
+  
+  - Observables Overview
+    - https://angular.io/guide/observables
+  
+  - Observables compared to other techniques
+    - https://angular.io/guide/comparing-observables
+    
+  - DebounceTime example
+    - https://angular.io/tutorial/toh-pt6#search-by-name
+    
+- Communicating with backend services using HTTP
+  - https://angular.io/guide/http
+  
+- Lazy-loading feature modules
+  - https://angular.io/guide/lazy-loading-ngmodules
+
+-------------------------------------------------------------
+- Angular Material
+  - https://material.angular.io/
+  - https://material.angular.io/components/categories
+
+- A Complete Guide to Flexbox
+  - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+  
+- CSS Flexbox Tutorial for Beginners
+  - https://youtu.be/siKKg8Y_tQY
+  - https://youtu.be/RdlEEfx912M
+
+- Angular Flex-Layout
+  - https://github.com/angular/flex-layout
+
+-------------------------------------------------------------
+- Firebase
+
+  - Installation & Setup for REST API
+    - https://firebase.google.com/docs/database/rest/start
+
+  - Firebase Database REST API
+    - https://firebase.google.com/docs/reference/rest/database
+
+  - Firebase Auth REST API
+    - https://firebase.google.com/docs/reference/rest/auth
+
+  - Authenticate REST Requests
+    - https://firebase.google.com/docs/database/rest/auth
+  
+-------------------------------------------------------------
+- NgRx
+  
+  - Redux DevTools Chrome Extension
+    - https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+    
+  - Redux DevTools Extension GitHub Repository
+    - https://github.com/zalmoxisus/redux-devtools-extension
+    
+  - What is NgRx?
+    - https://ngrx.io/docs
+    
+  - NgRx Store
+    - https://ngrx.io/guide/store
+    
+  - Crash Course: Angular and ngRx | Aspen Payton
+    - https://youtu.be/272KDxSIQBw
+
+-------------------------------------------------------------
+- Progressive Web Applications (PWA)
+
+  - Introduction to PWA
+    - https://web.dev/progressive-web-apps/
+    - https://web.dev/what-are-pwas/
+
+  - Angular service worker introduction
+    - https://angular.io/guide/service-worker-intro
+    
+  - Getting started with service workers
+    - https://angular.io/guide/service-worker-getting-started
+    
+  - Create a Progressive Web App with the Angular CLI
+    - https://web.dev/creating-pwa-with-angular-cli/
+    
+  - Service worker configuration
+    - https://angular.io/guide/service-worker-config
+    
+  - Angular University Blogs
+    - Angular Service Worker - Step-By-Step Guide for turning your Application into a PWA
+      - https://blog.angular-university.io/angular-service-worker/
+      
+    - Angular App Shell - Boosting Application Startup Performance
+      - https://blog.angular-university.io/angular-app-shell/
+      
+    - Angular Push Notifications: a Complete Step-by-Step Guide
+      - https://blog.angular-university.io/angular-push-notifications/
+      
+    - Service Workers - Practical Guided Introduction (several examples)
+      - https://blog.angular-university.io/service-workers/
+
+  - Progressive Web App Training (YouTube)
+    - https://www.youtube.com/playlist?list=PLNYkxOF6rcIB2xHBZ7opgc2Mv009X87Hh
+    
+-------------------------------------------------------------
+- Angular Testing
+  
+  - Jasmine
+    - https://jasmine.github.io/pages/getting_started.html
+    
+  - Angular Testing
+    - https://angular.io/guide/testing
+
+-------------------------------------------------------------
+- Micro Frontends
+
+  - Micro Frontends
+    - https://martinfowler.com/articles/micro-frontends.html
+    
+  - Micro Frontends
+    - https://micro-frontends.org/
+
+  - Pattern: Backends For Frontends
+    - https://samnewman.io/patterns/architectural/bff/
+
+  - How To Implement Micro-Frontend Architecture With Angular
+    - https://medium.com/bb-tutorials-and-thoughts/how-to-implement-micro-frontend-architecture-with-angular-e6828a0a049c
+
+  - 6 Steps to your Angular-based Microfrontend Shell
+    - https://www.angulararchitects.io/aktuelles/6-steps-to-your-angular-based-microfrontend-shell/
+    
+  - Build Micro Front-Ends Using Angular Elements: The Beginner's Guide
+    - https://dzone.com/articles/build-micro-front-ends-using-angular-elements-the
+    
+  - YouTube Videos
+    - Micro Frontends: Composing web apps with Angular and Single-Spa
+      - https://youtu.be/GALSD2U7HOI
+      
+    - Microfrontends with single-spa
+      - https://youtu.be/5Gqxs_o97tE
+      
+    - Micro-frontends: A microservice approach to the modern web - Ivan Jovanovic, NearForm
+      - https://youtu.be/ftBc8w-lwmY
+
+------------------------------------------------------------
+  - HTML5
+    - https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5
