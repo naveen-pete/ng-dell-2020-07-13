@@ -2,6 +2,7 @@
   <div class="row">
 
     <div class="col-md-4">
+
       <h4>Product Form</h4>
       <div class="card bg-light">
         <div class="card-body">
@@ -36,7 +37,7 @@
       </div>
 
       <div class="alert alert-success mt-3" role="alert" *ngIf="showMessage">
-        New product created successfully.
+        New product saved successfully.
       </div>
 
     </div>
@@ -44,7 +45,7 @@
     <div class="col">
 
       <h4>Products</h4>
-      <div class="card bg-light mb-2" *ngFor="let product of products">
+      <div class="card bg-light mb-2" style="max-width: 30rem;" *ngFor="let product of products">
         <h5 class="card-header">{{ product.name | uppercase }}</h5>
         <div class="card-body">
           <p class="card-text" [ngStyle]="{color: product.isAvailable ? 'blue' : 'orange'}">{{ product.description }}
@@ -56,8 +57,11 @@
               [ngClass]="{ 'badge-success': product.isAvailable, 'badge-danger': !product.isAvailable }">{{ product.isAvailable ? 'Yes' : 'No' }}</em>
           </p>
         </div>
-        <div class="card-footer">
-          <button type="button" class="btn btn-warning btn-sm">
+        <div class="card-footer text-right">
+          <button type="button" class="btn btn-outline-primary btn-sm mr-2">
+            Edit
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm">
             Delete
           </button>
         </div>
