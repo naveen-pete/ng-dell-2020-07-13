@@ -1,27 +1,23 @@
-<h3>Products</h3>
+<div class="container">
+  <h3>Products</h3>
+  <p>Date: {{ today | date : 'longDate' | uppercase }}</p>
 
-<div>
-  Name: {{ productName }}
-</div>
-<div>
-  Price: {{ productPrice }}
-</div>
-<div>
-  Available?: {{ productIsAvailable }}
-</div>
-<hr>
-<div>
-  Name: <input [(ngModel)]="productName" type="text" class="form-control">
-</div>
-<div>
-  <button class="btn btn-primary" (click)="onSave()">Save</button>
-</div>
-<hr>
-<div>
-  Search: <input type="text" class="form-control" placeholder="enter search text.." (keyup)="onSearch($event)">
-</div>
+  <div class="card bg-light m-3" *ngFor="let product of products">
+    <h4 class="card-header">{{ product.name | uppercase }}</h4>
+    <div class="card-body">
+      <p class="card-text" [ngStyle]="{color: product.isAvailable ? 'blue' : 'orange'}">{{ product.description }}</p>
+      <p class="card-text"><strong class="mr-2">Price:</strong> <em>{{ product.price | currency : 'INR' }}</em></p>
+      <p class="card-text">
+        <strong class="mr-2">Available?</strong>
+        <em class="badge"
+          [ngClass]="{ 'badge-success': product.isAvailable, 'badge-danger': !product.isAvailable }">{{ product.isAvailable ? 'Yes' : 'No' }}</em>
+      </p>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="btn btn-warning btn-sm">
+        Delete
+      </button>
+    </div>
+  </div>
 
-<hr>
-<div>
-  {{ productName }} is on sale at discounted price for SBI credit card users
 </div>
