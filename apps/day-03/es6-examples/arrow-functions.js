@@ -21,6 +21,7 @@ var sum = (a, b) => a + b;
 // ES6 / ES2015 - arrow function syntax #3
 var square = n => n * n;
 
+// ES6 / ES2015 - arrow function syntax #4
 var sayHi = () => console.log('hi');
 
 var c = sum(20, 30);
