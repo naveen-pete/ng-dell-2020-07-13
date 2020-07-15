@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container-fluid products">
   <div class="row">
 
-    <div class="col-4">
-      <h3>Product Form</h3>
+    <div class="col-md-4">
+      <h4>Product Form</h4>
       <div class="card bg-light">
         <div class="card-body">
           <form>
@@ -41,11 +41,11 @@
 
     </div>
 
-    <div class="col-8">
+    <div class="col">
 
-      <h3>Products</h3>
+      <h4>Products</h4>
       <div class="card bg-light mb-2" *ngFor="let product of products">
-        <h4 class="card-header">{{ product.name | uppercase }}</h4>
+        <h5 class="card-header">{{ product.name | uppercase }}</h5>
         <div class="card-body">
           <p class="card-text" [ngStyle]="{color: product.isAvailable ? 'blue' : 'orange'}">{{ product.description }}
           </p>
