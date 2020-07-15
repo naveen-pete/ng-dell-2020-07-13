@@ -8,19 +8,8 @@ import { ProductModel } from '../models/product.model';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  today = Date.now();
-
-  // product: ProductModel = new ProductModel();
-
-  // product: ProductModel = new ProductModel(1, 'iPhone XR', 'Smart phone from Apple', 65000, true);
-
-  // product: ProductModel = {
-  //   id: 1,
-  //   name: 'iPhone XR',
-  //   description: 'Smart phone from Apple',
-  //   price: 65000,
-  //   isAvailable: true
-  // };
+  showMessage: boolean = false;
+  product: ProductModel = new ProductModel();
 
   products: ProductModel[] = [
     {
@@ -49,6 +38,21 @@ export class ProductsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    this.product.id = Date.now();
+
+    var newProduct = { ...this.product };
+    this.products.unshift(newProduct);
+
+    this.product = new ProductModel();
+
+    this.showMessage = true;
+
+    setTimeout(() => {
+      this.showMessage = false;
+    }, 4000);
   }
 
 }
