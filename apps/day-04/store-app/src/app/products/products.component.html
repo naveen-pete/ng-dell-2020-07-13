@@ -1,0 +1,71 @@
+<div class="container-fluid products">
+  <div class="row">
+
+    <div class="col-md-4">
+      <h4>Product Form</h4>
+      <div class="card bg-light">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input class="form-control" type="text" id="name" name="name" placeholder="Enter name"
+                [(ngModel)]="product.name" />
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" rows="3" placeholder="Enter description" id="description"
+                name="description" [(ngModel)]="product.description"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input class="form-control" type="text" id="price" name="price" placeholder="Enter price"
+                [(ngModel)]="product.price" />
+            </div>
+
+            <div class="form-group form-check">
+              <input type="checkbox" id="isAvailable" name="isAvailable" class="form-check-input" value="true"
+                [(ngModel)]="product.isAvailable" />
+              <label for="isAvailable" class="form-check-label">Available?</label>
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="alert alert-success mt-3" role="alert" *ngIf="showMessage">
+        New product created successfully.
+      </div>
+
+    </div>
+
+    <div class="col">
+
+      <h4>Products</h4>
+      <div class="card bg-light mb-2" *ngFor="let product of products">
+        <h5 class="card-header">{{ product.name | uppercase }}</h5>
+        <div class="card-body">
+          <p class="card-text" [ngStyle]="{color: product.isAvailable ? 'blue' : 'orange'}">{{ product.description }}
+          </p>
+          <p class="card-text"><strong class="mr-2">Price:</strong> <em>{{ product.price | currency : 'INR' }}</em></p>
+          <p class="card-text">
+            <strong class="mr-2">Available?</strong>
+            <em class="badge"
+              [ngClass]="{ 'badge-success': product.isAvailable, 'badge-danger': !product.isAvailable }">{{ product.isAvailable ? 'Yes' : 'No' }}</em>
+          </p>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-warning btn-sm">
+            Delete
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
