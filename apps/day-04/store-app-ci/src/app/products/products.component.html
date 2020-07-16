@@ -2,13 +2,15 @@
   <div class="row">
 
     <div class="col-md-4">
-      <app-product-form (productCreated)="onProductCreated($event)"></app-product-form>
+      <app-product-form (createProduct)="onCreateProduct($event)"></app-product-form>
+
+      <app-filter (applyFilter)="onApplyFilter($event)"></app-filter>
     </div>
 
     <div class="col">
       <h4>Products</h4>
       <app-product-detail [product]="p" (deleteProduct)="onDeleteProduct($event)" (editProduct)="onEditProduct($event)"
-        *ngFor="let p of products">
+        *ngFor="let p of filteredProducts">
       </app-product-detail>
     </div>
 

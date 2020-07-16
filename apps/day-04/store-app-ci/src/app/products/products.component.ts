@@ -8,6 +8,9 @@ import { ProductModel } from '../models/product.model';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+  availableFilter = 'all';
+  filteredProducts: ProductModel[] = [];
+
   products: ProductModel[] = [
     {
       id: 1,
@@ -35,18 +38,41 @@ export class ProductsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.filterProducts();
   }
 
-  onProductCreated(newProduct: ProductModel) {
+  onCreateProduct(newProduct: ProductModel) {
     this.products.unshift(newProduct);
+    this.filterProducts();
   }
 
   onDeleteProduct(id: number) {
     this.products = this.products.filter(p => p.id !== id);
+    this.filterProducts();
   }
 
   onEditProduct(product: ProductModel) {
     console.log('ProductsComponent.onEditProduct() handler:', product);
+  }
+
+  onApplyFilter(filter: string) {
+    this.availableFilter = filter;
+    this.filterProducts();
+  }
+
+  private filterProducts() {
+    switch (this.availableFilter) {
+      case 'available':
+        this.filteredProducts = this.products.filter(p => p.isAvailable);
+        break;
+
+      case 'notAvailable':
+        this.filteredProducts = this.products.filter(p => !p.isAvailable);
+        break;
+
+      default:
+        this.filteredProducts = this.products;
+    }
   }
 
 }
