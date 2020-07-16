@@ -9,6 +9,9 @@
 
     <div class="col">
       <h4>Products</h4>
+
+      <app-filter-display [filterValue]="availableFilter"></app-filter-display>
+
       <app-product-detail [product]="p" (deleteProduct)="onDeleteProduct($event)" (editProduct)="onEditProduct($event)"
         *ngFor="let p of filteredProducts">
       </app-product-detail>
