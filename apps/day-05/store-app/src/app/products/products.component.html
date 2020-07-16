@@ -1,0 +1,17 @@
+<div class="container-fluid products">
+  <div class="row">
+
+    <div class="col-md-4">
+      <app-product-form (createProduct)="onCreateProduct($event)"></app-product-form>
+    </div>
+
+    <div class="col">
+      <h4>Products</h4>
+      <app-product-detail [product]="p" (deleteProduct)="onDeleteProduct($event)" (editProduct)="onEditProduct($event)"
+        *ngFor="let p of products">
+      </app-product-detail>
+    </div>
+
+  </div>
+
+</div>
