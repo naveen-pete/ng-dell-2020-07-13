@@ -15,15 +15,13 @@ export class ProductsComponent implements OnInit {
   constructor(
     private loggerService: LoggerService,
     private productsService: ProductsService
-  ) {
-    // this.products = this.productsService.getProducts();
-  }
+  ) { }
 
   ngOnInit(): void {
     this.products = this.productsService.getProducts();
   }
 
-  onProductCreated(newProduct: ProductModel) {
+  onCreateProduct(newProduct: ProductModel) {
     this.products.unshift(newProduct);
   }
 
@@ -33,6 +31,7 @@ export class ProductsComponent implements OnInit {
 
   onEditProduct(product: ProductModel) {
     this.loggerService.log('ProductsComponent.onEditProduct() handler');
+    this.loggerService.log(product);
   }
 
 }

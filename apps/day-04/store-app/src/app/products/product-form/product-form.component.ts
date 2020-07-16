@@ -8,7 +8,7 @@ import { ProductModel } from '../../models/product.model';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
-  @Output() productCreated = new EventEmitter<ProductModel>();
+  @Output() createProduct = new EventEmitter<ProductModel>();
 
   showMessage: boolean = false;
   product: ProductModel = new ProductModel();
@@ -22,7 +22,7 @@ export class ProductFormComponent implements OnInit {
     this.product.id = Date.now();
 
     const newProduct = { ...this.product };
-    this.productCreated.emit(newProduct);
+    this.createProduct.emit(newProduct);
 
     this.product = new ProductModel();
 
