@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 import { ProductModel } from '../../models/product.model';
 import { LoggerService } from '../../common/logger.service';
@@ -11,15 +12,25 @@ import { ProductsService } from '../products.service';
 })
 export class ProductDetailComponent implements OnInit {
   @Output() editProduct = new EventEmitter<ProductModel>();
-  @Input() product: ProductModel;
+  product: ProductModel = new ProductModel();
+  id: number;
 
   constructor(
     private loggerService: LoggerService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(
+      (map) => {
+        this.id = +map.get('id');
+        this.product = this.productsService.getProduct(this.id);
+
+        console.log('name:', map.get('name'));
+      }
+    );
   }
 
   onDelete(id: number) {

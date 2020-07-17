@@ -1,14 +1,12 @@
-<div class="container-fluid products">
+<div class="container-fluid">
   <div class="row">
 
     <div class="col-md-4">
-      <app-product-form></app-product-form>
+      <app-product-list></app-product-list>
     </div>
 
     <div class="col">
-      <h4>Products</h4>
-      <app-product-detail [product]="p" (editProduct)="onEditProduct($event)" *ngFor="let p of products">
-      </app-product-detail>
+      <router-outlet></router-outlet>
     </div>
 
   </div>

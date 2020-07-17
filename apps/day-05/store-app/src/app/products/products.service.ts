@@ -29,6 +29,13 @@ export class ProductsService {
       description: 'A mobile phone from Google',
       isAvailable: false,
       price: 50000
+    },
+    {
+      id: 4,
+      name: 'Asus Zenfone',
+      description: 'A mobile phone from Asus',
+      isAvailable: false,
+      price: 50000
     }
   ];
 
