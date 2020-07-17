@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -6,19 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  selectedItem = 'Home';
+  selectedUrl = '/';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-  }
-
-  onItemClick(event: any) {
-    this.selectedItem = event.target.innerText;
+    this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe((e: NavigationEnd) => {
+        this.selectedUrl = e.url.startsWith('/products') ? '/products' : e.url;
+      });
   }
 
   applyActive(item: string) {
-    return this.selectedItem === item;
+    return this.selectedUrl === item;
   }
 
 }

@@ -12,7 +12,7 @@ import { ProductFormComponent } from './products/product-form/product-form.compo
 import { LoggerService } from './common/logger.service';
 import { ProductsService } from './products/products.service';
 import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotificationComponent } from './notification/notification.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -28,13 +28,26 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'products', component: ProductsComponent, children: [
+      {
+        path: '', component: NotificationComponent, data: {
+          header: 'Note!',
+          message: 'Use \'Add New Product\' button to create a product. Select a product to view its details.',
+          type: 'info'
+        }
+      },
       { path: 'new', component: ProductFormComponent },
-      { path: ':id/:name', component: ProductDetailComponent }
+      { path: ':id', component: ProductDetailComponent }
     ]
   },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
-  { path: '**', component: NotFoundComponent }
+  {
+    path: '**', component: NotificationComponent, data: {
+      header: 'Sorry!',
+      message: '404 - Page not found.',
+      type: 'danger'
+    }
+  }
 ];
 
 @NgModule({
@@ -45,7 +58,7 @@ const appRoutes: Routes = [
     ProductDetailComponent,
     ProductFormComponent,
     HomeComponent,
-    NotFoundComponent,
+    NotificationComponent,
     ProductListComponent,
     SignUpComponent,
     LoginComponent,
