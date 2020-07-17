@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ProductModel } from '../../models/product.model';
 import { LoggerService } from '../../common/logger.service';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,20 +11,19 @@ import { LoggerService } from '../../common/logger.service';
 })
 export class ProductDetailComponent implements OnInit {
   @Output() editProduct = new EventEmitter<ProductModel>();
-  @Output() deleteProduct = new EventEmitter<number>();
   @Input() product: ProductModel;
 
-  private loggerService: LoggerService;
-
-  constructor(loggerService: LoggerService) {
-    this.loggerService = loggerService;
+  constructor(
+    private loggerService: LoggerService,
+    private productsService: ProductsService
+  ) {
   }
 
   ngOnInit(): void {
   }
 
   onDelete(id: number) {
-    this.deleteProduct.emit(id);
+    this.productsService.deleteProduct(id);
   }
 
   onEdit(product: ProductModel) {

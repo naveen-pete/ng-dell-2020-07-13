@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { ProductModel } from '../models/product.model';
 import { LoggerService } from '../common/logger.service';
@@ -9,8 +10,9 @@ import { ProductsService } from './products.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   products: ProductModel[] = [];
+  private productsChangedSub: Subscription;
 
   constructor(
     private loggerService: LoggerService,
@@ -18,20 +20,24 @@ export class ProductsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // subscribe to products changed event (from ProductsService)
+    this.productsChangedSub = this.productsService.productsChanged.subscribe((products: ProductModel[]) => {
+      this.products = products;
+      console.log('updated products:', products);
+    });
+
     this.products = this.productsService.getProducts();
-  }
-
-  onCreateProduct(newProduct: ProductModel) {
-    this.products.unshift(newProduct);
-  }
-
-  onDeleteProduct(id: number) {
-    this.products = this.products.filter(p => p.id !== id);
   }
 
   onEditProduct(product: ProductModel) {
     this.loggerService.log('ProductsComponent.onEditProduct() handler');
     this.loggerService.log(product);
+  }
+
+  ngOnDestroy() {
+    if (this.productsChangedSub) {
+      this.productsChangedSub.unsubscribe();
+    }
   }
 
 }
