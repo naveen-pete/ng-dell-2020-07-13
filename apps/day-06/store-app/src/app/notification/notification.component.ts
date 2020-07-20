@@ -15,10 +15,10 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(
-      ({ header, message, type }) => {
-        this.header = header;
-        this.message = message;
-        this.type = type;
+      (data) => {
+        this.header = data.header;
+        this.message = data.message;
+        this.type = data.type;
       }
     );
   }

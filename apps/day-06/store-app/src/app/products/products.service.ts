@@ -45,7 +45,7 @@ export class ProductsService {
 
   getProduct(id: number) {
     const product = this.products.find(p => p.id === id);
-    return product;
+    return { ...product };
   }
 
   addProduct(product: ProductModel) {
@@ -54,16 +54,20 @@ export class ProductsService {
       id: Date.now()
     };
 
-    console.log('before adding:', this.products);
     this.products = [...this.products, newProduct];
-    console.log('after adding:', this.products);
 
     // emit event
     this.productsChanged.next(this.products);
   }
 
-  updateProduct(id, product) {
+  updateProduct(id: number, product: ProductModel) {
+    const updatedProduct = { ...product };
+    this.products = this.products.map(p => {
+      return p.id === id ? updatedProduct : p;
+    });
+
     // emit event
+    this.productsChanged.next(this.products);
   }
 
   deleteProduct(id: number) {

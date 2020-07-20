@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 
 import { ProductModel } from '../../models/product.model';
 import { LoggerService } from '../../common/logger.service';
@@ -11,14 +11,14 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  @Output() editProduct = new EventEmitter<ProductModel>();
   product: ProductModel = new ProductModel();
   id: number;
 
   constructor(
     private loggerService: LoggerService,
     private productsService: ProductsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -32,11 +32,13 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onDelete(id: number) {
-    this.productsService.deleteProduct(id);
+    if (confirm('Are you sure?')) {
+      this.productsService.deleteProduct(id);
+      this.router.navigate(['/products']);
+    }
   }
 
-  onEdit(product: ProductModel) {
-    this.loggerService.log('ProductDetailComponent.onEdit() - emitting \'editProduct\' event');
-    this.editProduct.emit(product);
+  onEdit() {
+    this.router.navigate(['/products', this.id, 'edit']);
   }
 }

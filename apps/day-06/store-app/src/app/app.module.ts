@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,38 +16,10 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { LoginComponent } from './auth/login/login.component';
 
-// http://localhost:4200/  - Home
-// http://localhost:4200/products  - Products
-// http://localhost:4200/products/new  - ProductForm
-// http://localhost:4200/products/2  - ProductDetail
-// http://localhost:4200/signup  - Sign up
-// http://localhost:4200/login  - Login
+import { ProductFormCreateComponent } from './products/product-form-create/product-form-create.component';
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  {
-    path: 'products', component: ProductsComponent, children: [
-      {
-        path: '', component: NotificationComponent, data: {
-          header: 'Note!',
-          message: 'Use \'Add New Product\' button to create a product. Select a product to view its details.',
-          type: 'info'
-        }
-      },
-      { path: 'new', component: ProductFormComponent },
-      { path: ':id', component: ProductDetailComponent }
-    ]
-  },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignUpComponent },
-  {
-    path: '**', component: NotificationComponent, data: {
-      header: 'Sorry!',
-      message: '404 - Page not found.',
-      type: 'danger'
-    }
-  }
-];
+import { AppRoutingModule } from './app-routing.module';
+import { ProductFormUpdateComponent } from './products/product-form-update/product-form-update.component';
 
 @NgModule({
   declarations: [
@@ -62,11 +33,13 @@ const appRoutes: Routes = [
     ProductListComponent,
     SignUpComponent,
     LoginComponent,
+    ProductFormCreateComponent,
+    ProductFormUpdateComponent
   ],
   imports: [
     BrowserModule,
     FormsModule, // ngModel
-    RouterModule.forRoot(appRoutes)  // router-outlet, routerLink directives, services
+    AppRoutingModule
   ],
   providers: [LoggerService, ProductsService],
   bootstrap: [AppComponent]
