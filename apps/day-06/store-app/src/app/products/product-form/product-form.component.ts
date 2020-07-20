@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { ProductModel } from '../../models/product.model';
 
@@ -8,6 +9,7 @@ import { ProductModel } from '../../models/product.model';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
+  @ViewChild('productForm') form: NgForm;
   @Input() product: ProductModel = new ProductModel();
   @Input() mode: string = 'Create';
   @Output() saveProduct = new EventEmitter<ProductModel>();
@@ -18,7 +20,10 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSave() {
-    this.saveProduct.emit(this.product);
+    if (!this.form.valid) {
+      return;
+    }
+    this.saveProduct.emit(this.form.value);
   }
 
 }

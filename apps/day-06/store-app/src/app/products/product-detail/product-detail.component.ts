@@ -31,9 +31,9 @@ export class ProductDetailComponent implements OnInit {
     );
   }
 
-  onDelete(id: number) {
+  onDelete() {
     if (confirm('Are you sure?')) {
-      this.productsService.deleteProduct(id);
+      this.productsService.deleteProduct(this.id);
       this.router.navigate(['/products']);
     }
   }

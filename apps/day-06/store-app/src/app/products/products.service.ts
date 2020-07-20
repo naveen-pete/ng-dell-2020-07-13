@@ -62,9 +62,9 @@ export class ProductsService {
 
   updateProduct(id: number, product: ProductModel) {
     const updatedProduct = { ...product };
-    this.products = this.products.map(p => {
-      return p.id === id ? updatedProduct : p;
-    });
+    this.products = this.products.map(
+      p => p.id === id ? updatedProduct : p
+    );
 
     // emit event
     this.productsChanged.next(this.products);
