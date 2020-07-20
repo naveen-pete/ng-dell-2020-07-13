@@ -1,0 +1,3 @@
+<app-product-form [product]="product" mode="Create" (saveProduct)="onSaveProduct($event)" *ngIf="!isLoading">
+</app-product-form>
+<app-spinner *ngIf="isLoading"></app-spinner>
