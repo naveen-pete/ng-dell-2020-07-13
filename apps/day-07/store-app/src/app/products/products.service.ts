@@ -1,67 +1,73 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Subject, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { ProductModel } from '../models/product.model';
 
 @Injectable()
 export class ProductsService {
+  apiUrl = 'https://store-app-24ac4.firebaseio.com/store-app/products';
   // expose a custom event
   productsChanged: Subject<ProductModel[]> = new Subject<ProductModel[]>();
 
-  private products: ProductModel[] = [
-    {
-      id: 1,
-      name: 'iPhone X',
-      description: 'A mobile phone from Apple',
-      isAvailable: true,
-      price: 60000
-    },
-    {
-      id: 2,
-      name: 'Samsung Galaxy Note 10',
-      description: 'A mobile phone from Samsung',
-      isAvailable: true,
-      price: 80000
-    },
-    {
-      id: 3,
-      name: 'Google Pixel 3',
-      description: 'A mobile phone from Google',
-      isAvailable: false,
-      price: 50000
-    },
-    {
-      id: 4,
-      name: 'Asus Zenfone',
-      description: 'A mobile phone from Asus',
-      isAvailable: false,
-      price: 50000
-    }
-  ];
+  private products: ProductModel[] = [];
 
-  getProducts() {
-    return [...this.products];
+  constructor(private http: HttpClient) { }
+
+  getProducts(): Observable<ProductModel[]> {
+    return this.http.get<ProductModel[]>(`${this.apiUrl}.json`)
+      .pipe(
+        map((responseData: any) => {
+          if (!responseData) {
+            return [];
+          }
+
+          const products: ProductModel[] = [];
+          const keys = Object.keys(responseData);
+          keys.forEach((key) => {
+            const product: ProductModel = {
+              ...responseData[key],
+              id: key
+            };
+            products.push(product);
+          })
+          return products;
+        }),
+        tap((products) => {
+          this.products = [...products];
+        })
+      );
   }
 
-  getProduct(id: number) {
+  getProduct(id: string) {
+    // return this.http.get<ProductModel>(`${this.apiUrl}/${id}.json`);
     const product = this.products.find(p => p.id === id);
-    return { ...product };
+    return product;
   }
 
   addProduct(product: ProductModel) {
-    const newProduct = {
-      ...product,
-      id: Date.now()
-    };
+    return this.http.post<any>(`${this.apiUrl}.json`, product)
+      .pipe(
+        tap((responseData: any) => {
+          const newProduct = {
+            ...product,
+            id: responseData.name
+          };
 
-    this.products = [...this.products, newProduct];
+          this.products = [...this.products, newProduct];
 
-    // emit event
-    this.productsChanged.next(this.products);
+          // emit event
+          this.productsChanged.next(this.products);
+        })
+      );
   }
 
-  updateProduct(id: number, product: ProductModel) {
-    const updatedProduct = { ...product };
+  updateProduct(id: string, product: ProductModel) {
+    const updatedProduct = {
+      ...product,
+      id: id
+    };
     this.products = this.products.map(
       p => p.id === id ? updatedProduct : p
     );
@@ -70,7 +76,7 @@ export class ProductsService {
     this.productsChanged.next(this.products);
   }
 
-  deleteProduct(id: number) {
+  deleteProduct(id: string) {
     this.products = this.products.filter(p => p.id !== id);
 
     // emit event

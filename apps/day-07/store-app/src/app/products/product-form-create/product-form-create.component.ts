@@ -21,8 +21,17 @@ export class ProductFormCreateComponent implements OnInit {
   }
 
   onSaveProduct(product: ProductModel) {
-    this.productsService.addProduct(product);
-    this.router.navigate(['/products']);
+    this.productsService.addProduct(product).subscribe(
+      (responseData: any) => {
+        console.log('Add product successful.');
+        console.log('responseData:', responseData);
+        this.router.navigate(['/products']);
+      },
+      (error: any) => {
+        console.log('Add product failed.');
+        console.log('Error:', error.message);
+      }
+    );
   }
 
 }

@@ -1,0 +1,33 @@
+
+  {
+    "-MCk5xuDaoj1KWUUM9wn": {
+      "description": "Smart phone from Apple",
+      "isAvailable": true,
+      "name": "iPhone X",
+      "price": 60000
+    },
+    "-MCk6QKwDwIWlgwDWM-W": {
+      "description": "Smart phone from Samsung",
+      "isAvailable": false,
+      "name": "Samsung Galaxy Note 10",
+      "price": 70000
+    }
+  }
+
+  [
+    {
+      "id": "-MCk5xuDaoj1KWUUM9wn",
+      "description": "Smart phone from Apple",
+      "isAvailable": true,
+      "name": "iPhone X",
+      "price": 60000
+
+    },
+    {
+      "id": "-MCk6QKwDwIWlgwDWM-W",
+      "description": "Smart phone from Samsung",
+      "isAvailable": false,
+      "name": "Samsung Galaxy Note 10",
+      "price": 70000
+    }
+  ]

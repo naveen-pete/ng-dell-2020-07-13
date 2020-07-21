@@ -4,8 +4,8 @@
     <form #productForm="ngForm" (ngSubmit)="onSave()">
       <div class="form-group">
         <label for="name">Name</label>
-        <input class="form-control" type="text" id="name" name="name" placeholder="Enter name" ngModel required
-          minlength="3" #name="ngModel" />
+        <input class="form-control" type="text" id="name" name="name" placeholder="Enter name" [ngModel]="product.name"
+          required minlength="3" #name="ngModel" />
         <div class="alert alert-warning" *ngIf="name.touched && !name.valid">
           <div *ngIf="name.hasError('required')">
             Name is required.
@@ -19,7 +19,7 @@
       <div class="form-group">
         <label for="description">Description</label>
         <textarea class="form-control" rows="3" placeholder="Enter description" id="description" name="description"
-          ngModel required #description="ngModel"></textarea>
+          [ngModel]="product.description" required #description="ngModel"></textarea>
         <div class="alert alert-warning" *ngIf="description.touched && !description.valid">
           Description is required.
         </div>
@@ -27,16 +27,16 @@
 
       <div class="form-group">
         <label for="price">Price</label>
-        <input class="form-control" type="text" id="price" name="price" placeholder="Enter price" ngModel required
-          #price="ngModel" />
+        <input class="form-control" type="text" id="price" name="price" placeholder="Enter price"
+          [ngModel]="product.price" required #price="ngModel" />
         <div class="alert alert-warning" *ngIf="price.touched && !price.valid">
           Price is required.
         </div>
       </div>
 
       <div class="form-group form-check">
-        <input type="checkbox" id="isAvailable" name="isAvailable" class="form-check-input" value="true" ngModel
-          #isAvailable="ngModel" />
+        <input type="checkbox" id="isAvailable" name="isAvailable" class="form-check-input" value="true"
+          [ngModel]="product.isAvailable" #isAvailable="ngModel" />
         <label for="isAvailable" class="form-check-label">Available?</label>
       </div>
 

@@ -25,7 +25,15 @@ export class ProductListComponent implements OnInit, OnDestroy {
       products => this.products = products
     );
 
-    this.products = this.productsService.getProducts();
+    this.productsService.getProducts().subscribe(
+      (products) => {
+        this.products = products;
+      },
+      (error: any) => {
+        console.log('Get products failed.');
+        console.log('Error:', error.message);
+      }
+    );
   }
 
   onAdd() {

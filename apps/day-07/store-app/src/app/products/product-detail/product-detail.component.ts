@@ -12,7 +12,7 @@ import { ProductsService } from '../products.service';
 })
 export class ProductDetailComponent implements OnInit {
   product: ProductModel = new ProductModel();
-  id: number;
+  id: string;
 
   constructor(
     private loggerService: LoggerService,
@@ -25,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(
       map => {
-        this.id = +map.get('id');
+        this.id = map.get('id');
         this.product = this.productsService.getProduct(this.id);
       }
     );

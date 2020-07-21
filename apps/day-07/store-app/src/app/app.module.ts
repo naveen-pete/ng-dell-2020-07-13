@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -39,6 +40,7 @@ import { ProductFormUpdateComponent } from './products/product-form-update/produ
   imports: [
     BrowserModule,
     FormsModule, // ngModel (Template drive forms feature)
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [LoggerService, ProductsService],

@@ -16,14 +16,21 @@ export class ProductFormComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   onSave() {
     if (!this.form.valid) {
       return;
     }
-    this.saveProduct.emit(this.form.value);
+
+    const product: ProductModel = new ProductModel();
+    const { name, description, price, isAvailable } = this.form.value;
+    product.name = name;
+    product.description = description;
+    product.price = parseInt(price);
+    product.isAvailable = isAvailable || false;
+
+    this.saveProduct.emit(product);
   }
 
 }

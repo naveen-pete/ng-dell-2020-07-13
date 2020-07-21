@@ -11,7 +11,7 @@ import { ProductModel } from '../../models/product.model';
 })
 export class ProductFormUpdateComponent implements OnInit {
   product: ProductModel = new ProductModel();
-  id: number;
+  id: string;
 
   constructor(
     private productsService: ProductsService,
@@ -22,7 +22,7 @@ export class ProductFormUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(
       map => {
-        this.id = +map.get('id');
+        this.id = map.get('id');
         this.product = this.productsService.getProduct(this.id);
       }
     );
