@@ -57,7 +57,24 @@ export const doWork = () => {
     );
 };
 
-// map((user: any) => {
-//   const newUser = { ...user, name: user.name.toUpperCase() };
-//   return newUser;
-// }),
+// export const doWork = () => {
+//   getUser('hari')
+//     .pipe(
+//       map((user: any) => {
+//         const newUser = { ...user, name: user.name.toUpperCase() };
+//         return newUser;
+//       }),
+//       switchMap((user: any) => {
+//         console.log('user:', user);
+//         return getPosts(user.id);
+//       })
+//     )
+//     .subscribe(
+//       (posts: any) => {
+//         console.log('posts for user:', posts);
+//       },
+//       (error: any) => {
+//         console.log('Error:', error);
+//       }
+//     );
+// };
