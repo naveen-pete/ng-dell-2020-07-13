@@ -2,7 +2,7 @@ import { users, posts } from './data';
 
 const getUser = (userName) => {
   return new Promise((resolve, reject) => {
-    console.log('promise - getUser() started.');
+    console.log('async/await - getUser() started.');
     setTimeout(() => {
       const user = users.find(
         u => u.name === userName
@@ -36,16 +36,14 @@ const getPosts = (userId) => {
   });
 }
 
-export const doWork = () => {
-  getUser('krish')
-    .then((user: any) => {
-      console.log('user:', user);
-      return getPosts(user.id);
-    })
-    .then((posts: any) => {
-      console.log('posts for user:', posts);
-    })
-    .catch((error) => {
-      console.log('Error:', error);
-    });
+export const doWork = async () => {
+  try {
+    const user: any = await getUser('krish');
+    console.log('user:', user);
+
+    const posts: any = await getPosts(user.id);
+    console.log('posts for user:', posts);
+  } catch (err) {
+    console.log('Error:', err);
+  }
 };

@@ -1,15 +1,15 @@
 import { Observable, Observer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { users, posts } from './data';
 
-const getUser = (userName) => {
+const getUser = (userName: string) => {
   return Observable.create((observer: Observer<any>) => {
-    console.log('Observable implementation getUser() started.');
-    setTimeout(function () {
-      const user = users.find(function (u) {
-        return u.name === userName;
-      });
+    console.log('observable - getUser() started.');
+    setTimeout(() => {
+      const user = users.find(
+        u => u.name === userName
+      );
 
       if (!user) {
         observer.error('Could not find user.');
@@ -21,13 +21,13 @@ const getUser = (userName) => {
   })
 };
 
-const getPosts = (userId) => {
+const getPosts = (userId: number) => {
   return Observable.create((observer: Observer<any>) => {
     console.log('getPosts() started.');
     setTimeout(() => {
-      const postsForUser = posts.filter((p) => {
-        return p.userId === userId;
-      });
+      const postsForUser = posts.filter(
+        p => p.userId === userId
+      );
 
       if (postsForUser.length <= 0) {
         observer.error('Could not find posts for user');
@@ -40,34 +40,24 @@ const getPosts = (userId) => {
 };
 
 export const doWork = () => {
-  console.log('begin');
-
   getUser('hari')
     .pipe(
-      // op1,
-      // op2,
-      // op3
-      map((user: any) => {
-        const newUser = { ...user, name: user.name.toUpperCase() };
-        return newUser;
+      switchMap((user: any) => {
+        console.log('user:', user);
+        return getPosts(user.id);
       })
     )
     .subscribe(
-      (user: any) => {
-        console.log('user:', user);
-        getPosts(user.id).subscribe(
-          (posts: any) => {
-            console.log('posts for user:', posts);
-          },
-          (error) => {
-            console.log('Error:', error);
-          }
-        );
+      (posts: any) => {
+        console.log('posts for user:', posts);
       },
-      (error) => {
+      (error: any) => {
         console.log('Error:', error);
       }
     );
-
-  console.log('end');
 };
+
+// map((user: any) => {
+//   const newUser = { ...user, name: user.name.toUpperCase() };
+//   return newUser;
+// }),

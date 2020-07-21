@@ -1,11 +1,11 @@
 import { users, posts } from './data';
 
 const getUser = function (userName, cb) {
-  console.log('getUser() started.');
-  setTimeout(function () {
-    const user = users.find(function (u) {
-      return u.name === userName;
-    });
+  console.log('callback - getUser() started.');
+  setTimeout(() => {
+    const user = users.find(
+      u => u.name === userName
+    );
 
     if (!user) {
       cb('Could not find user.', null);
@@ -19,9 +19,9 @@ const getUser = function (userName, cb) {
 const getPosts = (userId, cb) => {
   console.log('getPosts() started.');
   setTimeout(() => {
-    const postsForUser = posts.filter((p) => {
-      return p.userId === userId;
-    });
+    const postsForUser = posts.filter(
+      p => p.userId === userId
+    );
 
     if (postsForUser.length <= 0) {
       cb('Could not find posts for user', null);
@@ -33,8 +33,6 @@ const getPosts = (userId, cb) => {
 };
 
 export function doWork() {
-  console.log('begin');
-
   getUser('hari', (err, user) => {
     if (err) {
       console.log('getUser() Error:', err);
@@ -51,6 +49,4 @@ export function doWork() {
       console.log('posts for user:', posts);
     });
   });
-
-  console.log('end');
 }
