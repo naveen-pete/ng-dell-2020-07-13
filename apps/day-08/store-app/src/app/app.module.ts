@@ -42,6 +42,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
   imports: [
     BrowserModule,
     FormsModule, // ngModel (Template drive forms feature)
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule
   ],
