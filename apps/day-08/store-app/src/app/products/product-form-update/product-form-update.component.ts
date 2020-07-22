@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { ProductsService } from '../products.service';
 import { ProductModel } from '../../models/product.model';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-form-update',
@@ -10,6 +11,7 @@ import { ProductModel } from '../../models/product.model';
   styleUrls: ['./product-form-update.component.css']
 })
 export class ProductFormUpdateComponent implements OnInit {
+  isLoading = false;
   product: ProductModel = new ProductModel();
   id: string;
 
@@ -20,17 +22,42 @@ export class ProductFormUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      map => {
-        this.id = map.get('id');
-        this.product = this.productsService.getProduct(this.id);
-      }
-    );
+    this.route.paramMap
+      .pipe(
+        switchMap((paramMap: ParamMap) => {
+          this.isLoading = true;
+          this.id = paramMap.get('id');
+          return this.productsService.getProduct(this.id);
+        })
+      )
+      .subscribe(
+        (product) => {
+          this.product = product;
+          this.isLoading = false;
+        },
+        (error) => {
+          console.log('Get product failed.');
+          console.log('Error:', error);
+          this.isLoading = false;
+        }
+      );
   }
 
   onSaveProduct(product: ProductModel) {
-    this.productsService.updateProduct(this.id, product);
-    this.router.navigate(['/products', this.id]);
+    this.isLoading = true;
+    this.productsService.updateProduct(this.id, product)
+      .subscribe(
+        () => {
+          this.isLoading = false;
+          this.router.navigate(['/products', this.id]);
+        },
+        (error) => {
+          console.log('Update product failed.');
+          console.log('Error:', error);
+          this.isLoading = false;
+        }
+      );
+
   }
 
 }

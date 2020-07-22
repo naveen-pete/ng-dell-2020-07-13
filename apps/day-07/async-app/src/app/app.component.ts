@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     console.log('begin');
     doWork();
+    console.log('perform some other operation');
     console.log('end');
   }
 

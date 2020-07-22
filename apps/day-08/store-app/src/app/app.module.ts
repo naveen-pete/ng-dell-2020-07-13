@@ -21,6 +21,7 @@ import { ProductFormCreateComponent } from './products/product-form-create/produ
 
 import { AppRoutingModule } from './app-routing.module';
 import { ProductFormUpdateComponent } from './products/product-form-update/product-form-update.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProductFormUpdateComponent } from './products/product-form-update/produ
     SignUpComponent,
     LoginComponent,
     ProductFormCreateComponent,
-    ProductFormUpdateComponent
+    ProductFormUpdateComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

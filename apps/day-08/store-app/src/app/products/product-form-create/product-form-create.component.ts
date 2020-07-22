@@ -10,6 +10,7 @@ import { ProductModel } from 'src/app/models/product.model';
   styleUrls: ['./product-form-create.component.css']
 })
 export class ProductFormCreateComponent implements OnInit {
+  isLoading = false;
   product: ProductModel = new ProductModel();
 
   constructor(
@@ -21,15 +22,16 @@ export class ProductFormCreateComponent implements OnInit {
   }
 
   onSaveProduct(product: ProductModel) {
+    this.isLoading = true;
     this.productsService.addProduct(product).subscribe(
-      (responseData: any) => {
-        console.log('Add product successful.');
-        console.log('responseData:', responseData);
+      () => {
         this.router.navigate(['/products']);
+        this.isLoading = false;
       },
       (error: any) => {
         console.log('Add product failed.');
         console.log('Error:', error.message);
+        this.isLoading = false;
       }
     );
   }

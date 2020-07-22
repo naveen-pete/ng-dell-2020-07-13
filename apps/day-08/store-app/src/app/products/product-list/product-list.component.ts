@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { ProductModel } from '../../models/product.model';
 import { ProductsService } from '../products.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-product-list',
@@ -11,6 +12,7 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit, OnDestroy {
+  isLoading = false;
   products: ProductModel[];
 
   private subProductsChanged: Subscription;
@@ -25,13 +27,16 @@ export class ProductListComponent implements OnInit, OnDestroy {
       products => this.products = products
     );
 
+    this.isLoading = true;
     this.productsService.getProducts().subscribe(
       (products) => {
         this.products = products;
+        this.isLoading = false;
       },
       (error: any) => {
         console.log('Get products failed.');
         console.log('Error:', error.message);
+        this.isLoading = false;
       }
     );
   }
