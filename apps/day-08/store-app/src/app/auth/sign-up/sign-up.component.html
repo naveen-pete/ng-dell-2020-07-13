@@ -13,7 +13,7 @@
               <label for="name">Name</label>
               <input class="form-control" type="text" id="name" name="name" placeholder="Enter your name"
                 formControlName="name" />
-              <div class="alert alert-warning" *ngIf="Name.touched && !Name.valid">
+              <div class="alert alert-warning" *ngIf="Name.touched && Name.invalid">
                 Name is required.
               </div>
             </div>
@@ -25,7 +25,7 @@
               <div class="alert alert-info" *ngIf="Email.pending">
                 Please wait. Checking for duplicate email...
               </div>
-              <div class="alert alert-warning" *ngIf="Email.touched && !Email.valid">
+              <div class="alert alert-warning" *ngIf="Email.touched && Email.invalid">
                 <div *ngIf="Email.hasError('required')">
                   Email is required.
                 </div>
@@ -42,7 +42,7 @@
               <label for="password">Password</label>
               <input class="form-control" type="password" id="password" name="password" placeholder="Enter password"
                 autocomplete="off" formControlName="password" />
-              <div class="alert alert-warning" *ngIf="Password.touched && !Password.valid">
+              <div class="alert alert-warning" *ngIf="Password.touched && Password.invalid">
                 <div *ngIf="Password.hasError('required')">
                   Password is required.
                 </div>
