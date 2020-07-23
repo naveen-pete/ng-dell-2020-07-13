@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +22,7 @@ import { ProductFormCreateComponent } from './products/product-form-create/produ
 import { AppRoutingModule } from './app-routing.module';
 import { ProductFormUpdateComponent } from './products/product-form-update/product-form-update.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,11 @@ import { SpinnerComponent } from './spinner/spinner.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [LoggerService, ProductsService],
+  providers: [
+    LoggerService,
+    ProductsService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

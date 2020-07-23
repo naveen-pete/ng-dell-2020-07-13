@@ -12,6 +12,8 @@ import { AuthData } from '../../models/auth-data.model';
 })
 export class SignUpComponent implements OnInit {
   form: FormGroup;
+  errorMessage: string;
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -31,6 +33,8 @@ export class SignUpComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+    this.errorMessage = null;
     const authData: AuthData = {
       email: this.form.value.email,
       password: this.form.value.password,
@@ -40,11 +44,14 @@ export class SignUpComponent implements OnInit {
       (responseData) => {
         console.log('Sign up is successful.');
         console.log('responseData:', responseData);
+        this.isLoading = false;
         this.router.navigate(['/products']);
       },
-      (error) => {
+      (error: Error) => {
         console.log('Sign up failed.');
         console.log('Error:', error);
+        this.errorMessage = error.message;
+        this.isLoading = false;
       }
     );
   }

@@ -12,6 +12,8 @@ import { AuthData } from 'src/app/models/auth-data.model';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  errorMessage: string;
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -30,6 +32,9 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.isLoading = true;
+    this.errorMessage = null;
+
     const authData: AuthData = {
       email: this.form.value.email,
       password: this.form.value.password,
@@ -39,11 +44,14 @@ export class LoginComponent implements OnInit {
       (responseData) => {
         console.log('Login is successful.');
         console.log('responseData:', responseData);
+        this.isLoading = false;
         this.router.navigate(['/products']);
       },
-      (error) => {
+      (error: Error) => {
         console.log('Login failed.');
         console.log('Error:', error);
+        this.errorMessage = error.message;
+        this.isLoading = false;
       }
     );
   }
