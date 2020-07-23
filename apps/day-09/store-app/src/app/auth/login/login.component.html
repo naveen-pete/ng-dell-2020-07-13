@@ -8,20 +8,34 @@
         </div>
 
         <div class="card-body">
-          <form>
+          <form [formGroup]="form" (ngSubmit)="onLogin()">
             <div class="form-group">
               <label for="email">Email</label>
-              <input class="form-control" type="text" id="email" name="email" placeholder="Enter email" />
+              <input class="form-control" type="text" id="email" name="email" placeholder="Enter email"
+                formControlName="email" />
+              <div class="alert alert-warning" *ngIf="Email.touched && Email.invalid">
+                <div *ngIf="Email.hasError('required')">
+                  Email is required.
+                </div>
+                <div *ngIf="Email.hasError('email')">
+                  Email is not valid.
+                </div>
+              </div>
             </div>
 
             <div class="form-group">
               <label for="password">Password</label>
               <input class="form-control" type="password" id="password" name="password" placeholder="Enter password"
-                autocomplete="off" />
+                autocomplete="off" formControlName="password" />
+              <div class="alert alert-warning" *ngIf="Password.touched && Password.invalid">
+                <div *ngIf="Password.hasError('required')">
+                  Password is required.
+                </div>
+              </div>
             </div>
 
             <div class="text-center">
-              <button type="button" class="btn btn-outline-primary">Login</button>
+              <button type="submit" [disabled]="!form.valid" class="btn btn-outline-primary">Login</button>
             </div>
           </form>
         </div>
