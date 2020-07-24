@@ -31,12 +31,12 @@ describe('ProductsComponent', () => {
     productsService = TestBed.get(ProductsService);
   });
 
-  xit('should create an instance of the component', () => {
+  it('should create an instance of the component', () => {
     expect(component).toBeTruthy();
     expect(el).toBeTruthy();
   });
 
-  xit('should show the products', () => {
+  it('should show the products', () => {
     const testProducts = [
       { id: 1, name: 'p1', description: 'p1 desc', price: 10, isAvailable: true },
       { id: 2, name: 'p2', description: 'p2 desc', price: 20, isAvailable: false }
@@ -50,22 +50,25 @@ describe('ProductsComponent', () => {
     expect(el.queryAll(By.css('tr.data-row')).length).toBe(testProducts.length);
   });
 
-  xit('should delete a product', () => {
+  it('should delete a product', () => {
     const testProducts = [
       { id: 1, name: 'p1', description: 'p1 desc', price: 10, isAvailable: true },
       { id: 2, name: 'p2', description: 'p2 desc', price: 20, isAvailable: false }
     ];
 
     productsService.getProducts.and.returnValue(of(testProducts));
+    productsService.deleteProduct.and.returnValue(of(''));
     spyOn(window, 'confirm').and.returnValue(true);
 
     fixture.detectChanges();
 
     // console.log(el.queryAll(By.css('#deleteLink')).length);
-    const link = el.query(By.css('#deleteLink'));
-    // link.triggerEventHandler('click', null);
-    link.nativeElement.click();
+    const links = el.queryAll(By.css('#deleteLink'));
 
-    expect(productsService.deleteProduct).toHaveBeenCalled();
+    // simulate click event on the second delete link
+    links[1].triggerEventHandler('click', null);
+    // links[1].nativeElement.click();
+
+    expect(productsService.deleteProduct).toHaveBeenCalledWith(2);
   });
 });

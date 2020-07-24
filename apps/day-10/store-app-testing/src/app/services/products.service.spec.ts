@@ -32,7 +32,7 @@ describe('ProductsService', () => {
 
     service.getProducts().subscribe(
       (products: Product[]) => {
-        console.log(products);
+        // console.log(products);
         expect(products.length).toBe(testProducts.length);
       }
     );
@@ -53,7 +53,7 @@ describe('ProductsService', () => {
 
     service.addProduct(product).subscribe(
       (newProduct: Product) => {
-        console.log('new product:', newProduct);
+        // console.log('new product:', newProduct);
 
         expect(newProduct.id).toBeTruthy();
         expect(newProduct.name).toBe(product.name);
