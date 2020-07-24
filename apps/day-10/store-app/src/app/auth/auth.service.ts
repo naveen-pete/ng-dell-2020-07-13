@@ -16,6 +16,7 @@ const TOKEN_EXPIRATION_TIME_IN_SEC = 600;  // 10 minutes
 })
 export class AuthService {
   user: BehaviorSubject<User> = new BehaviorSubject(null);
+  private autoLogoutTimer: number;
 
   constructor(
     private http: HttpClient,
@@ -42,8 +43,53 @@ export class AuthService {
       );
   }
 
+  autoLogin() {
+    const userData: {
+      id: string;
+      email: string;
+      _token: string;
+      _tokenExpiryDate: string;
+    } = JSON.parse(localStorage.getItem('userData'));
+
+    if (!userData) {
+      return;
+    }
+
+    const tokenExpiryDate = new Date(userData._tokenExpiryDate);
+    const user = new User(
+      userData.id,
+      userData.email,
+      userData._token,
+      tokenExpiryDate
+    );
+    if (user.token) {
+      this.user.next(user);
+
+      // start the timer
+      const expiryDuration = tokenExpiryDate.getTime() - Date.now();
+      this.autoLogout(expiryDuration);
+    }
+  }
+
+  private autoLogout(expiryDuration: number) {
+    console.log('expiryDuration:', expiryDuration);
+    this.autoLogoutTimer = window.setTimeout(
+      () => {
+        this.logout();
+      },
+      expiryDuration
+    );
+  }
+
   logout() {
     this.user.next(null);
+    localStorage.removeItem('userData');
+
+    if (this.autoLogoutTimer) {
+      window.clearTimeout(this.autoLogoutTimer);
+      this.autoLogoutTimer = null;
+    }
+
     this.router.navigate(['/login']);
   }
 
@@ -55,9 +101,13 @@ export class AuthService {
     const tokenExpiryDate = new Date(Date.now() + expiresInMS);
 
     const authenticatedUser = new User(localId, email, idToken, tokenExpiryDate);
+    localStorage.setItem('userData', JSON.stringify(authenticatedUser));
 
     // emit an event
     this.user.next(authenticatedUser);
+
+    // start the timer
+    this.autoLogout(expiresInMS);
   }
 
   // NOTE:

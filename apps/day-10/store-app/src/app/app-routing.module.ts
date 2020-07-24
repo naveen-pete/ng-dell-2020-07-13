@@ -10,6 +10,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 
 import { ProductFormCreateComponent } from './products/product-form-create/product-form-create.component';
 import { ProductFormUpdateComponent } from './products/product-form-update/product-form-update.component';
+import { AuthGuard } from './auth/auth.guard';
 
 // http://localhost:4200/  - Home
 // http://localhost:4200/products  - Products
@@ -22,7 +23,7 @@ import { ProductFormUpdateComponent } from './products/product-form-update/produ
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: 'products', component: ProductsComponent, children: [
+    path: 'products', component: ProductsComponent, canActivate: [AuthGuard], children: [
       {
         path: '', component: NotificationComponent, data: {
           header: 'Note!',

@@ -4,7 +4,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpParams
+  HttpParams,
+  HttpHeaders
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
@@ -17,9 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
-    console.log('AuthInterceptor.intercept() invoked.');
-
     return this.authService.user.pipe(
       take(1),
       switchMap(user => {
@@ -28,7 +26,8 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
         const modifiedRequest = request.clone({
-          params: new HttpParams().set('auth', user.token)
+          params: new HttpParams().set('auth', user.token),
+          headers: new HttpHeaders().set('x-auth', 'Bearer auth-token')
         });
         return next.handle(modifiedRequest);
       })

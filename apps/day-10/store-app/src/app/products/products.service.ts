@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
-import { map, tap, switchMap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { ProductModel } from '../models/product.model';
 import { environment } from '../../environments/environment';
-import { AuthService } from '../auth/auth.service';
-import { User } from '../models/user.model';
 
 @Injectable()
 export class ProductsService {
@@ -17,8 +15,7 @@ export class ProductsService {
   private products: ProductModel[] = [];
 
   constructor(
-    private http: HttpClient,
-    private authService: AuthService
+    private http: HttpClient
   ) { }
 
   getProducts(): Observable<ProductModel[]> {
@@ -47,6 +44,7 @@ export class ProductsService {
     //     this.products = [...products];
     //   })
     // );
+
     return this.http.get<ProductModel[]>(`${this.apiUrl}.json`)
       .pipe(
         map((responseData: any) => {
