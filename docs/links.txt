@@ -195,3 +195,8 @@ Links
 ------------------------------------------------------------
   - HTML5
     - https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5
+    
+------------------------------------------------------------
+- Angular Modules - My YouTube Video link
+  - Using Modules in Angular | NgModules Tutorial
+    - https://youtu.be/sDC3QwuwQH0
