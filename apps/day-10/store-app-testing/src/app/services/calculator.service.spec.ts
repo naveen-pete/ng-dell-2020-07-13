@@ -13,6 +13,8 @@ describe('CalculatorService', () => {
     loggerSpy = jasmine.createSpyObj('LoggerService', ['log']);
 
     TestBed.configureTestingModule({
+      declarations: [],
+      imports: [],
       providers: [
         CalculatorService,
         { provide: LoggerService, useValue: loggerSpy }

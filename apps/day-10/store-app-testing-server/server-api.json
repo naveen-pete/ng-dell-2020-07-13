@@ -20,6 +20,13 @@
       "description": "XPS For the ultimate experience Laptops with exceptional build quality, powerful features with manageability and security options",
       "price": 98990,
       "isAvailable": true
+    },
+    {
+      "name": "p10",
+      "description": "p10 desc",
+      "price": 10,
+      "isAvailable": false,
+      "id": 4
     }
   ],
   "users": [

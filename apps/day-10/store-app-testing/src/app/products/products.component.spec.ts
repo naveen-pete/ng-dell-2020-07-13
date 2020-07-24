@@ -31,12 +31,12 @@ describe('ProductsComponent', () => {
     productsService = TestBed.get(ProductsService);
   });
 
-  it('should create an instance of the component', () => {
+  xit('should create an instance of the component', () => {
     expect(component).toBeTruthy();
     expect(el).toBeTruthy();
   });
 
-  it('should show the products', () => {
+  xit('should show the products', () => {
     const testProducts = [
       { id: 1, name: 'p1', description: 'p1 desc', price: 10, isAvailable: true },
       { id: 2, name: 'p2', description: 'p2 desc', price: 20, isAvailable: false }
